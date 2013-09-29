@@ -1,0 +1,157 @@
+Cmp-Mod V01 Created by CvPcb (2013-may-18)-stable date = Чт. 26 сент. 2013 22:57:07
+
+BeginCmp
+TimeStamp = /5235F942;
+Reference = C1;
+ValeurCmp = C22;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /5235F94F;
+Reference = C2;
+ValeurCmp = C22;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /52360576;
+Reference = C3;
+ValeurCmp = 0.1uF;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /5236108A;
+Reference = C4;
+ValeurCmp = 0.1uF;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /523611C8;
+Reference = C5;
+ValeurCmp = 2.2mF;
+IdModule  = SM1812;
+EndCmp
+
+BeginCmp
+TimeStamp = /52361093;
+Reference = C6;
+ValeurCmp = 0.1uF;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /5235FAB5;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = LED-0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /5236108D;
+Reference = IC1;
+ValeurCmp = ATMEGA328P-TQFP32;
+IdModule  = TQFP32;
+EndCmp
+
+BeginCmp
+TimeStamp = /52360C91;
+Reference = P1;
+ValeurCmp = Power;
+IdModule  = SIL-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /5236023E;
+Reference = P2;
+ValeurCmp = RELE CONNECTOR;
+IdModule  = SIL-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /5235F648;
+Reference = P3;
+ValeurCmp = UART_RST;
+IdModule  = SIL-5;
+EndCmp
+
+BeginCmp
+TimeStamp = /52447EB0;
+Reference = P4;
+ValeurCmp = TWI SW;
+IdModule  = SIL-4;
+EndCmp
+
+BeginCmp
+TimeStamp = /52360961;
+Reference = Q1;
+ValeurCmp = MOS_N;
+IdModule  = SOT23GDS;
+EndCmp
+
+BeginCmp
+TimeStamp = /5244842E;
+Reference = R1;
+ValeurCmp = R4.7;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /5235FAA6;
+Reference = R2;
+ValeurCmp = 200;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /52448428;
+Reference = R3;
+ValeurCmp = R4.7;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /522A381B;
+Reference = R6;
+ValeurCmp = R4.7;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /522A3821;
+Reference = R7;
+ValeurCmp = R4.7;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /523CACFA;
+Reference = R8;
+ValeurCmp = 1k;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /523618A3;
+Reference = U1;
+ValeurCmp = MAX6634;
+IdModule  = SO8E;
+EndCmp
+
+BeginCmp
+TimeStamp = /52360BB5;
+Reference = U2;
+ValeurCmp = 7805;
+IdModule  = LM78XX;
+EndCmp
+
+BeginCmp
+TimeStamp = /52361023;
+Reference = X1;
+ValeurCmp = 12mHz;
+IdModule  = SM1210;
+EndCmp
+
+EndListe
