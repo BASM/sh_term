@@ -737,7 +737,7 @@ Wire Wire Line
 Wire Wire Line
 	6950 5350 6950 5400
 Text Label 5600 4500 0    60   ~ 0
-SDL SW
+SCL SW
 Text Label 5600 4350 0    60   ~ 0
 SDA SW
 Wire Wire Line
@@ -747,7 +747,7 @@ Wire Wire Line
 Wire Wire Line
 	5350 4500 5350 4350
 Text Label 6400 5150 0    60   ~ 0
-SDL SW
+SCL SW
 Text Label 6400 5250 0    60   ~ 0
 SDA SW
 Wire Wire Line
@@ -780,7 +780,7 @@ $EndComp
 Text Label 6450 5600 2    60   ~ 0
 SDA SW
 Text Label 6450 5750 2    60   ~ 0
-SDL SW
+SCL SW
 $Comp
 L +5V #PWR027
 U 1 1 52448436
