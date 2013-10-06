@@ -12,5 +12,4 @@ AVRLIBS+=twi
 AVRLIBS+=adc
 AVRLIBS+=stdioconf
 
-
 include makefiles/avr.mk
