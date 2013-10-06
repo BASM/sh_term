@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/asm/Projects/sh_termo/circuts/kotel.sch)
-    (date "Чт. 26 сент. 2013 23:06:19")
+    (date "Вс. 06 окт. 2013 13:45:40")
     (tool "eeschema (2013-may-18)-stable"))
   (components
     (comp (ref C4)
@@ -353,11 +353,11 @@
       (node (ref P1) (pin 1))
       (node (ref IC1) (pin 3))
       (node (ref IC1) (pin 5)))
-    (net (code 12) (name "/SDL SW")
+    (net (code 12) (name "/SDA SW")
       (node (ref IC1) (pin 24))
       (node (ref P4) (pin 2))
       (node (ref R1) (pin 1)))
-    (net (code 13) (name "/SDA SW")
+    (net (code 13) (name "/SDL SW")
       (node (ref IC1) (pin 23))
       (node (ref R3) (pin 1))
       (node (ref P4) (pin 3)))
