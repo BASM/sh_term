@@ -7,6 +7,7 @@
 #include <twi.h>
 #include <adc.h>
 #include <twi_sw.h>
+#include "twisw.h"
 
 #define MAXTERM_PREF 0x4f
 #define DSTERM_PREF   0x4d
@@ -30,16 +31,22 @@ static int getcurterm() {
 }
 
 static int getcurtermSDS(twi_data *twi) {
-  int res;
+  int res,res1,res2;
   
-  printf("RR\n");
   if (twi_sw_req_read(twi,DSTERMSW_PREF,0xAA)) {
     return 0;
   }
-  res =twi_sw_read(twi,0)<<8;
-  res|=twi_sw_read(twi,1);
+  res1 =twi_sw_read(twi,0);
+  res2 =twi_sw_read(twi,1);
+
   twi_sw_stop(twi);
 
+  printf("RES1: %x\n",res1);
+  printf("RES2: %x\n",res2);
+
+  _delay_ms(10);
+
+  res=(res1<<8)|res2;
   //res=((res&0x3ffff)>>3)*0.0625*10;// 0x3ffff --remove sign, >>3-- remove LSB bit, 0.0625 -- 1LSB, 10 -- output at 0.1C
   res=((res&0x3ffff)>>3)*0.03125*10;// 0x3ffff --remove sign, >>3-- remove LSB bit, 0.0625 -- 1LSB,
   
@@ -60,6 +67,7 @@ static int getcurtermDS() {
   res|=twi_p_read(1);
   twi_p_stop();
 
+  _delay_ms(100);
   //res=((res&0x3ffff)>>3)*0.0625*10;// 0x3ffff --remove sign, >>3-- remove LSB bit, 0.0625 -- 1LSB, 10 -- output at 0.1C
   res=((res&0x3ffff)>>3)*0.03125*10;// 0x3ffff --remove sign, >>3-- remove LSB bit, 0.0625 -- 1LSB,
   
@@ -67,53 +75,6 @@ static int getcurtermDS() {
   twi_p_stop();
   return res;
 }
-
-static void s_cycle_wait(void *data) {
-  _delay_us(100);
-}
-
-#define SCL_NUM  0
-#define SCL_DDR  DDRC
-#define SCL_PORT PORTC
-#define SCL_PIN  PINC
-
-#define SDA_NUM  1
-#define SDA_DDR  DDRC
-#define SDA_PORT PORTC
-#define SDA_PIN  PINC
-
-static int s_scl_rl(void *data) {
-  //PC0 
-  SCL_DDR &=~(1<<SCL_NUM);
-
-  //while (((SCL_PIN>>SCL_NUM)&0x01)==0) {
-  //  printf("W");
-  //}
-  return 0;
-}
-
-static void s_scl_dn(void *data) {
-  SCL_DDR |= 1<<SCL_NUM;
-}
-
-static void s_sda_rl(void *data) {
-  SDA_DDR &=~(1<<SDA_NUM);
-}
-
-static void s_sda_dn(void *data) {
-  SDA_DDR |= (1<<SDA_NUM);
-}
-
-static int s_sda_read(void *data) {
-
-  return !((SDA_PIN>>SDA_NUM)&0x01);
-}
-
-static int s_scl_read(void *data) {
-
-  return !((SCL_PIN>>SCL_NUM)&0x01);
-}
-
 
 int main(void) {
   int term;
@@ -134,19 +95,7 @@ int main(void) {
   twi_data stwi_obj;
   twi_data *stwi=&stwi_obj;
 
-  //////////////////////////////
-  /////// SOFTWARE TWI /////////
-  SCL_PORT &=~(1<<SCL_NUM);//
-  SDA_PORT &=~(1<<SDA_NUM);//
-  stwi->scl_rl=s_scl_rl;
-  stwi->scl_dn=s_scl_dn;
-  stwi->sda_rl=s_sda_rl;
-  stwi->sda_dn=s_sda_dn;
-  stwi->sda_read=s_sda_read;
-  stwi->scl_read=s_scl_read;
-  stwi->cycle_wait=s_cycle_wait;
-  twi_sw_init(stwi,NULL);
-  //////////////////////////////
+  twisw_init(stwi);
 
 
   DDRC=0x00;
@@ -170,15 +119,18 @@ int main(void) {
     PORTD=1<<3;
     _delay_ms(2000);
 
-    printf("CURRENT 1\n");
-    term=getcurterm();
+    //printf("CURRENT 1\n");
+    //term=getcurterm();
     printf("CURRENT 2\n");
     term1=getcurtermDS();
     
     printf("CURRENT 3\n");
     term2=getcurtermSDS(stwi);
-    printf("Current term is: term %i, term1 %i, swterm: %i\n", term, term1, term2);
+    //printf("Current term is: term %i, term1 %i, swterm: %i\n", term, term1, term2);
+    printf("Current term is: term1 %i, swterm: %i\n", term1, term2);
   }
+  term=getcurterm();
+  (void)term;
 
 
   return 0;

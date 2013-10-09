@@ -4,7 +4,7 @@ DEVICE = atmega328p
 TYPEPROG=stk500v2 -P avrdoper
 AVRDUDE = avprog
 
-OBJECTS = main.o
+OBJECTS = main.o twi_sw.o
 
 DEPLIBS+=libstwi
 AVRLIBS+=uart
