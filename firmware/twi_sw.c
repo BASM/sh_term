@@ -37,7 +37,7 @@ static int s_scl_read(void *data) {
 }
   
 static void s_cycle_wait(void *data) {
-  _delay_us(1000);
+  _delay_us(100);
 }
 
 static int s_scl_rl(void *data) {
