@@ -9,4 +9,4 @@
 	url = git@github.com:BASM/libtwi.git
 [submodule "firmware/makefiles"]
 	path = firmware/makefiles
-	url = https://github.com/BASM/makefiles.git
+	url = git@github.com:BASM/makefiles.git
