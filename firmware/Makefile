@@ -1,4 +1,4 @@
-include makefiles/pre.mk
+include ../makefiles/pre.mk
 
 DEVICE = atmega328p
 TYPEPROG=stk500v2 -P avrdoper
@@ -12,4 +12,4 @@ AVRLIBS+=twi
 AVRLIBS+=adc
 AVRLIBS+=stdioconf
 
-include makefiles/avr.mk
+include ../makefiles/avr.mk
