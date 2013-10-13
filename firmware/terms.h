@@ -1,12 +1,12 @@
 
 #define TERM_I2C_PREF 0x48
-#define EE_FROM_TERM(termnum) (100+termnum*3)
+#define EE_FROM_TERM(termnum) (100+termnum*6)
 typedef struct {
 	uint8_t num;
-	int8_t min;
-	int8_t max;
+	int16_t min;
+	int16_t max;
 	int16_t cur;
-	int8_t last;
+	int8_t stat;
 	uint8_t port;
 } terms;
 
@@ -19,3 +19,5 @@ extern terms term_base_ext;
 extern terms terms_extend[]; 
 
 void TermUpdate(terms* T, int16_t cur);
+int  TermLoad(terms* T, int num);
+void TermSave(terms* T, uint8_t num);

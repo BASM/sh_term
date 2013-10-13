@@ -7,6 +7,6 @@
 [submodule "firmware/lib/libstwi"]
 	path = firmware/lib/libstwi
 	url = git@github.com:BASM/libtwi.git
-[submodule "firmware/makefiles"]
-	path = firmware/makefiles
+[submodule "makefiles"]
+	path = makefiles
 	url = git@github.com:BASM/makefiles.git

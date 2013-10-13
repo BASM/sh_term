@@ -23,70 +23,68 @@ int TermPort(uint8_t num, uint8_t s)
 	num=num&0x0F;
 	int real;
 	switch(num){
-		case 0: real=5; break;
+		case 0: real=3; break;
 		case 1: real=1; break;
 		case 2: real=2; break;
 		case 3: real=3; break;
 		case 4: real=4; break;
-		case 5: real=0; break;
+		case 5: real=5; break;
 		default:
 			return 0;
 	}
 	num=real;
 
-	PORTB=((PORTB&(~(1<<num))) | (s<<num));
+	PORTD=((PORTD&(~(1<<num))) | (s<<num));
 
   return 0;
 }
 
 int TermLoad(terms* T, int num)
 {
-	uint8_t *EEaddress;
+	uint16_t *EEaddress;
 	EEaddress=(void*)EE_FROM_TERM(num);	 
-	T->min = eeprom_read_byte(EEaddress+0);
-	T->max = eeprom_read_byte(EEaddress+1);
-  T->port= eeprom_read_byte(EEaddress+2);
-	
-	if( (T->min==-1) && (T->max==-1) && (T->port==0xFF)){ 
-		T->num=0xFF;
-		return 1;
-	}
-	T->num=num;
-	
+	T->min = eeprom_read_word(EEaddress+0);
+	T->max = eeprom_read_word(EEaddress+1);
+  T->port= eeprom_read_word(EEaddress+2);
+  
 	return 0;
 }
 
 void TermSave(terms* T, uint8_t num)
 {
-	uint8_t *EEaddress;
-	if(num>=8)
-		return;
+	uint16_t *EEaddress;
+	//if (num>=8)
+	//	return;
 
 	EEaddress=(void*)EE_FROM_TERM(num);	 
 
-	eeprom_write_byte(EEaddress+0,T->min);
-	eeprom_write_byte(EEaddress+1,T->max);
-	eeprom_write_byte(EEaddress+2,T->port);
+	eeprom_write_word(EEaddress+0,T->min);
+	eeprom_write_word(EEaddress+1,T->max);
+	eeprom_write_word(EEaddress+2,T->port);
 }
 
 void TermUpdate(terms* T, int16_t cur)
 {
 	T->cur = cur;
-	if(T->max <= T->min)
-		return;
-	if(T->num > 8)
-		return;
-  if(T->cur == TERM_MAX)
+  if (T->cur == TERM_MAX)
+    return;
+  if (T->port == (uint8_t)-1)
     return;
 
-	if(cur>=T->max) // Температура слижком высокая
-	{
-		TermPort(T->port, 0); // Включить 
-		T->last=cur;
-	}
-	if(cur<=T->min) // Температура слижком низкая
-	{	
-		TermPort(T->port, 1); // Включить 
-		T->last=cur;
-	}
+  if (T->max != TERM_MAX)
+    if (cur>=T->max) // Температура слижком высокая
+      if (T->stat!=0) {
+        printf("OFF from %i\n",T->num);
+        TermPort(T->port, 0); // Включить 
+        T->stat=0;
+      }
+
+  if (T->min != TERM_MAX)
+    if (cur<=T->min) // Температура слижком низкая
+      if (T->stat!=1) {
+        printf("ON from %i\n",T->num);
+        TermPort(T->port, 1); // Включить 
+        T->stat=1;
+      }
 }
+
