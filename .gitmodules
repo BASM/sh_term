@@ -3,7 +3,7 @@
 	url = git@github.com:BASM/kcel.git
 [submodule "firmware/lib/libavr"]
 	path = firmware/lib/libavr
-	url = git@github.com:BASM/libavr
+	url = git@github.com:BASM/libavr.git
 [submodule "firmware/lib/libstwi"]
 	path = firmware/lib/libstwi
 	url = git@github.com:BASM/libtwi.git
